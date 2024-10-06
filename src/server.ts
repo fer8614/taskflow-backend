@@ -9,6 +9,8 @@ connectDB();
 
 const app = express();
 
+app.use(express.json());
+
 //Routes
 app.use("/api/projects", projectRoutes);
 
