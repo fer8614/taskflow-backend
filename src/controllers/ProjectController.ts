@@ -1,4 +1,4 @@
-import type { Request, Response } from "express";
+import type { Request, Response, NextFunction } from "express";
 import Project from "../models/Project";
 
 export class ProjectController {
@@ -20,6 +20,20 @@ export class ProjectController {
     } catch (error) {
       console.log(error);
     }
-    res.send("All Projects");
+  };
+
+  static getProjectById = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+      const project = await Project.findById(id);
+      // if (!project) {
+      //   const error = new Error("Project no found");
+      //   res.status(404).json({ error: error.message });
+      //   return;
+      // }
+      res.json(project);
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
