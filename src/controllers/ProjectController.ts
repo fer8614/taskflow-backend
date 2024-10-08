@@ -26,12 +26,28 @@ export class ProjectController {
     const { id } = req.params;
     try {
       const project = await Project.findById(id);
-      // if (!project) {
-      //   const error = new Error("Project no found");
-      //   res.status(404).json({ error: error.message });
-      //   return;
-      // }
+      if (!project) {
+        const error = new Error("Project no found");
+        res.status(404).json({ error: error.message });
+        return;
+      }
       res.json(project);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  static updateProject = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+      const project = await Project.findByIdAndUpdate(id, req.body);
+      if (!project) {
+        const error = new Error("Project no found");
+        res.status(404).json({ error: error.message });
+        return;
+      }
+      await project?.save();
+      res.json("Project Updated Successfully");
     } catch (error) {
       console.log(error);
     }
