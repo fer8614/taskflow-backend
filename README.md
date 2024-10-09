@@ -73,9 +73,9 @@ Here are some of the main API endpoints available:
 
 - **Tasks**
   - `GET /api/projects` - Get all tasks
-  - `POST /api/projects` - Create a new task
-  - `PUT /api/projects/:id` - Update a task
-  - `DELETE /api/projects/:id` - Delete a task
+  - `POST /api/projects/:projectId/tasks` - Create a new task
+  - `PUT /api/projects/:projectId/tasks` - Update a task
+  - `DELETE /api/projects/:projectId/tasks` - Delete a task
 
 For a complete list of endpoints and their details, refer to the API documentation.
 
