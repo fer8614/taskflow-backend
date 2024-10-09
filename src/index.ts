@@ -1,5 +1,6 @@
 import colors from "colors";
 import server from "./server";
+import { env } from "node:process";
 
 const port = process.env.PORT || 4000;
 
