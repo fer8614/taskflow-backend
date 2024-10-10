@@ -65,6 +65,11 @@ TaskFlow is a task management web application designed to help users organize an
 Once the server is running, you can access the API at `http://localhost:your_preferred_port`. You can use tools like Postman or Insomnia to test the API endpoints.
 
 ## API Endpoints
+> [!NOTE]
+> With "Nested Resource Routing" as a design pattern in the construction of URLs for APls, especially in RESTful APls.
+It is implemented through a Middleware that will allow us to give better order to our routes.
+Because Middleware is executed on HTTP requests and
+before the controller, they make them a great place to be able to execute certain actions regarding whether the projects exist or if the user has permissions to access it.
 
 Here are some of the main API endpoints available:
 
