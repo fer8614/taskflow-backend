@@ -42,20 +42,22 @@ router.delete(
 );
 
 /** Routes for tasks */
-
+router.param("projectId", validateProjectExist);
 router.post(
   "/:projectId/tasks",
-  validateProjectExist,
   body("name").notEmpty().withMessage("Task name is required"),
   body("description").notEmpty().withMessage("Description of task is required"),
   handleInputErrors,
   TaskController.createTask,
 );
 
+router.get("/:projectId/tasks", TaskController.getProjectTasks);
+
 router.get(
-  "/:projectId/tasks",
-  validateProjectExist,
-  TaskController.getProjectTasks,
+  "/:projectId/tasks/:taskId",
+  param("taskId").isMongoId().withMessage("Invalid task id"),
+  handleInputErrors,
+  TaskController.getTaskById,
 );
 
 export default router;
