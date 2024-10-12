@@ -77,10 +77,15 @@ Here are some of the main API endpoints available:
   - `POST /api/projects` - Register a new project
 
 - **Tasks**
-  - `GET /api/projects` - Get all tasks
+  - `POST /api/projects` - Create a new project
+  - `GET /api/projects/:id` - Get all projects
+  - `PUT /api/projects/:id` - Update project by id
+  - `DELETE /api/projects/:id` - Delete a task
+  - ROUTES FIR TASKS
   - `POST /api/projects/:projectId/tasks` - Create a new task
-  - `PUT /api/projects/:projectId/tasks` - Update a task
-  - `DELETE /api/projects/:projectId/tasks` - Delete a task
+  - Mongoose Populate() Method
+  - The Populate method provided in mongoose ODM (Object Document Model) is used to replace the specified path in the document of one collection with the actual document from the other collection. In this case all the project data.
+  - `GET /api/projects/:projectId/tasks` - Create a new task
 
 For a complete list of endpoints and their details, refer to the API documentation.
 
