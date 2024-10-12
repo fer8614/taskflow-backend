@@ -45,8 +45,6 @@ router.delete(
 
 router.post(
   "/:projectId/tasks",
-  // param("projectId").isMongoId().withMessage("Invalid project id"),
-  // handleInputErrors,
   validateProjectExist,
   TaskController.createTask,
 );
