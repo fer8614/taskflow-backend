@@ -86,7 +86,6 @@ Here are some of the main API endpoints available:
 > [!NOTE]
 > Mongoose Populate() Method
 The Populate method provided in mongoose ODM (Object Document Model) is used to replace the specified path in the document of one collection with the actual document from the other collection. In this case all the project data.
-  
   - `GET /api/projects/:projectId/tasks` - Create a new task
 
 For a complete list of endpoints and their details, refer to the API documentation.
