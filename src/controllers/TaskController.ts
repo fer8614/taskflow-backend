@@ -45,4 +45,24 @@ export default class TaskController {
       res.status(500).json({ error: "There was an error" });
     }
   };
+
+  static updateTask = async (req: Request, res: Response) => {
+    try {
+      const { taskId } = req.params;
+      const task = await Task.findByIdAndUpdate(taskId, req.body);
+      if (!task) {
+        const error = new Error("Task not found");
+        res.status(404).json({ error: error.message });
+        return;
+      }
+      if (task.project.toString() !== req.project?.id) {
+        const error = new Error("Invalid action");
+        res.status(400).json({ error: error.message });
+        return;
+      }
+      res.send("Task updated correctly");
+    } catch (error) {
+      res.status(500).json({ error: "There was an error" });
+    }
+  };
 }
