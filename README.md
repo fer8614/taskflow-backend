@@ -91,6 +91,9 @@ The Populate method provided in mongoose ODM (Object Document Model) is used to 
   - `POST /api/projects/:projectId/tasks` - Create a new task
   - `GET /api/projects/:projectId/tasks` - Get all tasks by project
   - `GET /api/projects/:projectId/tasks/:taskId` - Get task by projectId and taskId
+  - `PUT /api/projects/:projectId/tasks/:taskId` - Update task by projectId and taskId
+  - `DELETE /api/projects/:projectId/tasks/:taskId` - Delete task by projectId and taskId
+  - `POST /api/projects/:projectId/tasks/:taskId` - Update status of task by projectId and taskId
 
 For a complete list of endpoints and their details, refer to the API documentation.
 
