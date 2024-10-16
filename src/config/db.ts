@@ -13,7 +13,7 @@ export const connectDB = async () => {
     console.log(`MongoDB connected: ${url}`.rainbow.underline.bold);
   } catch (error) {
     if (error instanceof Error) {
-      console.log(error.message);
+      // console.log(error.message);
     } else {
       console.log("Error desconocido", error);
     }
