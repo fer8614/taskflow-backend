@@ -7,7 +7,7 @@ export class ProjectController {
 
     try {
       await project.save();
-      res.send("Project Created Successfully");
+      res.status(201).send("Project Created Successfully");
     } catch (error) {
       console.log(error);
     }
