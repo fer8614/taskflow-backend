@@ -1,34 +1,42 @@
-const { MongoClient } = require("mongodb");
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-// URL de conexión a tu base de datos MongoDB
-const mongoURI = "mongodb://localhost:27017";
-const dbName = "testdb";
+dotenv.config();
 
-async function deleteDatabase() {
-  const client = new MongoClient(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+const deleteDatabase = async () => {
+  const dbUri: string | undefined = process.env.DATABASE_URL;
+
+  if (!dbUri) {
+    console.error("The database URI is not defined.");
+    return;
+  }
 
   try {
-    // Conectar al cliente de MongoDB
-    await client.connect();
-    console.log("Conectado a MongoDB");
+    // Connect to the database
+    await mongoose.connect(dbUri);
 
-    // Obtener la base de datos
-    const db = client.db(dbName);
+    console.log("Connected to the database");
 
-    // Eliminar la base de datos
-    await db.dropDatabase();
-    console.log(`Base de datos '${dbName}' eliminada`);
-  } catch (err) {
-    console.error("Error al eliminar la base de datos:", err);
+    // Verify the connection and the database
+    if (!mongoose.connection || !mongoose.connection.db) {
+      throw new Error("The connection or the database is not defined.");
+    }
+
+    // Get the database name
+    const dbName = mongoose.connection.db.databaseName;
+
+    // Delete the database
+    await mongoose.connection.db.dropDatabase();
+    console.log(`Database '${dbName}' deleted`);
+  } catch (error) {
+    console.error("Error to delete database:", error);
   } finally {
-    // Cerrar la conexión
-    await client.close();
-    console.log("Conexión cerrada");
+    // Close the connection
+    await mongoose.disconnect();
+    console.log("Connection closed");
   }
-}
+};
 
-// Exportar la función para usarla en otros archivos
-deleteDatabase();
+if (process.argv[2] === "--clear") {
+  deleteDatabase();
+}
