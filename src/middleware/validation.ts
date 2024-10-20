@@ -6,7 +6,6 @@ export const handleInputErrors = async (
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
-  // Lógica de validación
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     res.status(400).json({ errors: errors.array() });

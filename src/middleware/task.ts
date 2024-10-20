@@ -25,7 +25,7 @@ export async function taskExist(
     req.task = task;
     next();
   } catch (error) {
-    res.status(500).json({ error: "There was an error" });
+    res.status(400).json({ error: "There was an error" });
   }
 }
 

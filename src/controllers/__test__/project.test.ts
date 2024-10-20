@@ -1,6 +1,6 @@
 import request from "supertest";
 import server from "../../server";
-import { expect, jest, test } from "@jest/globals";
+import { expect } from "@jest/globals";
 
 describe("POST /api/projects", () => {
   it("Should display validation errors", async () => {
@@ -83,8 +83,8 @@ describe("GET /api/projects/", () => {
 
 describe("GET /api/projects/:id", () => {
   it("Should check a inavalid ID in the URL", async () => {
-    const productId = 999999;
-    const response = await request(server).get(`/api/projects/${productId}`);
+    const projectId = 999999;
+    const response = await request(server).get(`/api/projects/${projectId}`);
     expect(response.status).toBe(400);
     expect(response.body).toHaveProperty("errors");
     expect(response.body.errors[0].msg).toContain("Invalid project id");
@@ -175,6 +175,32 @@ describe("PUT /api/projects/;id", () => {
         projectName: "Test Client v2",
         description: "Test Description v2",
       });
+    expect(response.status).toBe(200);
+    expect(response.request.toJSON()).toHaveProperty("data");
+
+    expect(response.status).not.toBe(400);
+    expect(response.body).not.toHaveProperty("errors");
+  });
+});
+
+describe("DELETE /api/projects/:id", () => {
+  it("Should check a inavalid ID in the URL", async () => {
+    const projectId = 999999;
+    const response = await request(server).delete(`/api/projects/${projectId}`);
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty("errors");
+    expect(response.body.errors).toHaveLength(1);
+    expect(response.body.errors[0].msg).toContain("Invalid project id");
+  });
+
+  it("Validate that the projectName box is empty", async () => {
+    const newProject = await request(server).post("/api/projects").send({
+      clientName: "Test Client",
+      projectName: "Test Project",
+      description: "Test Description",
+    });
+    const projectId = newProject.body._id;
+    const response = await request(server).delete(`/api/projects/${projectId}`);
     expect(response.status).toBe(200);
     expect(response.request.toJSON()).toHaveProperty("data");
 

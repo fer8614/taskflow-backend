@@ -9,7 +9,7 @@ export default class TaskController {
       task.project = req.project?.id;
       req.project?.tasks.push(task.id);
       await Promise.allSettled([task.save(), req.project?.save()]);
-      res.send("Task created correctly");
+      res.status(201).json(task);
     } catch (error) {
       res.status(500).json({ error: "There was an error" });
     }
