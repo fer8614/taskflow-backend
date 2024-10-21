@@ -12,7 +12,6 @@ export const connectDB = async () => {
     const { connection } = await mongoose.connect(databaseUrl);
     const url = `${connection.host}:${connection.port}`;
     console.log(`MongoDB connected: ${url}`.rainbow.underline.bold);
-    console.log(databaseUrl);
   } catch (error) {
     if (error instanceof Error) {
       // console.log(error.message);
