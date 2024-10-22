@@ -10,6 +10,7 @@ Backend for the TaskFlow web application, a Full Stack MERN project (MongoDB, Ex
 - [Installation](#installation)
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
+- [Testing](#testing)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -96,6 +97,57 @@ The Populate method provided in mongoose ODM (Object Document Model) is used to 
   - `POST /api/projects/:projectId/tasks/:taskId` - Update status of task by projectId and taskId
 
 For a complete list of endpoints and their details, refer to the API documentation.
+
+## Testing
+
+This document provides an overview of the testing suite for the project API endpoints. The tests are written using [Jest](https://jestjs.io/) and [Supertest](https://github.com/visionmedia/supertest) to ensure the API endpoints are functioning correctly.
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Running Tests](#running-tests)
+- [Test Cases](#test-cases)
+  - [GET /api](#get-api)
+  - POST /api/projects
+  - GET /api/projects/
+  - GET /api/projects/:id
+  - PUT /api/projects/:id
+  - DELETE /api/projects/:id
+  - POST /api/projects/:projectId/tasks
+  - GET /api/projects/:projectId/tasks
+  - GET /api/projects/:projectId/tasks/:taskId
+  - PUT /api/projects/:projectId/tasks/:taskId
+  - DELETE /api/projects/:projectId/tasks/:taskId
+  - POST /api/projects/:projectId/tasks/:taskId/status
+
+## Installation
+
+To run the tests, you need to have Node.js installed. Follow the steps below to set up the testing environment:
+
+1. Clone the repository:
+    ```sh
+    git clone <repository-url>
+    cd <repository-directory>
+    ```
+
+2. Install the dependencies:
+    ```sh
+    npm install
+    ```
+
+## Running Tests
+
+To run the tests, use the following command:
+```sh
+npm test
+```
+
+## Test Cases
+
+### GET /api
+
+#### Description
+Tests the `/api/projects` endpoint to ensure it returns a JSON response.
 
 ## Contributing
 
