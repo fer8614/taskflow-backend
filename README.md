@@ -118,7 +118,7 @@ This document provides an overview of the testing suite for the project API endp
   - GET /api/projects/:projectId/tasks/:taskId
   - PUT /api/projects/:projectId/tasks/:taskId
   - DELETE /api/projects/:projectId/tasks/:taskId
-  - [POST /api/projects/:projectId/tasks/:taskId/status]
+  - POST /api/projects/:projectId/tasks/:taskId/status
 
 ## Installation
 
