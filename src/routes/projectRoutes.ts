@@ -82,6 +82,7 @@ router.delete(
 
 router.post(
   "/:projectId/tasks/:taskId/status",
+  param("projectId").isMongoId().withMessage("Invalid project id"),
   param("taskId").isMongoId().withMessage("Invalid task id"),
   body("status").notEmpty().withMessage("Status is required"),
   handleInputErrors,

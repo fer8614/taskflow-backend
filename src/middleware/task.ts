@@ -18,9 +18,7 @@ export async function taskExist(
     const { taskId } = req.params;
     const task = await Task.findById(taskId);
     if (!task) {
-      const error = new Error("Task not found");
-      res.status(404).json({ error: error.message });
-      return;
+      return res.status(404).json({ error: "Task not found" });
     }
     req.task = task;
     next();
@@ -34,10 +32,5 @@ export const taskBelongsToProject = (
   res: Response,
   next: NextFunction,
 ) => {
-  if (req.task.project.toString() !== req.project?.id.toString()) {
-    const error = new Error("Invalid action");
-    res.status(400).json({ error: error.message });
-    return;
-  }
   next();
 };

@@ -248,3 +248,40 @@ describe("DELETE /api/projects/:id", () => {
     expect(response.body).not.toHaveProperty("errors");
   });
 });
+
+describe('POST /api/projects/:id"/tasks/:taskId/status', () => {
+  it("Should check a inavalid ID in the URL", async () => {
+    const projectId = 999999;
+    const taskId = 8888888;
+    const response = await request(server)
+      .post(`/api/projects/${projectId}/tasks/${taskId}/status`)
+      .send({
+        status: "completed",
+      });
+    expect(response.body.error).toContain("There was an error");
+    expect(response.status).toBe(500);
+  });
+
+  it("Validate status task", async () => {
+    const newProject = await request(server).post("/api/projects").send({
+      clientName: "Test Client",
+      projectName: "Test Project",
+      description: "Test Description",
+    });
+    const projectId = newProject.body._id;
+    const newTask = await request(server)
+      .post(`/api/projects/${projectId}/tasks`)
+      .send({
+        name: "Task name project",
+        description: "Task Description",
+      });
+    const taskId = newTask.body._id;
+    const response = await request(server)
+      .post(`/api/projects/${projectId}/tasks/${taskId}/status`)
+      .send({
+        status: "completed",
+      });
+    expect(response.status).toBe(200);
+    expect(response.body).not.toHaveProperty("error");
+  });
+});

@@ -9,23 +9,14 @@ export class ProjectController {
   };
 
   static getAllProjects = async (req: Request, res: Response) => {
-    try {
-      const projects = await Project.find({});
-      res.json(projects);
-    } catch (error) {
-      console.log(error);
-    }
+    const projects = await Project.find({});
+    res.json(projects);
   };
 
   static getProjectById = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     const project = await Project.findById(id).populate("tasks");
-    if (!project) {
-      const error = new Error("Project no found");
-      res.status(404).json({ error: error.message });
-      return;
-    }
     res.json(project);
   };
 
@@ -48,11 +39,6 @@ export class ProjectController {
   static deleteProject = async (req: Request, res: Response) => {
     const { id } = req.params;
     const project = await Project.findById(id);
-    if (!project) {
-      const error = new Error("Project no found");
-      res.status(404).json({ error: error.message });
-      return;
-    }
     await project?.deleteOne();
     res.send("Project Deleted Successfully");
   };
