@@ -109,16 +109,16 @@ This document provides an overview of the testing suite for the project API endp
 - [Test Cases](#test-cases)
   - [GET /api](#get-api)
   - POST /api/projects
-  - [GET /api/projects/](#get-apiprojects)
-  - [GET /api/projects/:id](#get-apiprojectsid)
-  - [PUT /api/projects/:id](#put-apiprojectsid)
-  - [DELETE /api/projects/:id](#delete-apiprojectsid)
-  - [POST /api/projects/:projectId/tasks](#post-apiprojectsprojectidtasks)
-  - [GET /api/projects/:projectId/tasks](#get-apiprojectsprojectidtasks)
-  - [GET /api/projects/:projectId/tasks/:taskId](#get-apiprojectsprojectidtaskstaskid)
-  - [PUT /api/projects/:projectId/tasks/:taskId](#put-apiprojectsprojectidtaskstaskid)
-  - [DELETE /api/projects/:projectId/tasks/:taskId](#delete-apiprojectsprojectidtaskstaskid)
-  - [POST /api/projects/:projectId/tasks/:taskId/status](#post-apiprojectsprojectidtaskstaskidstatus)
+  - GET /api/projects/
+  - GET /api/projects/:id
+  - PUT /api/projects/:id
+  - DELETE /api/projects/:id
+  - POST /api/projects/:projectId/tasks
+  - GET /api/projects/:projectId/tasks
+  - GET /api/projects/:projectId/tasks/:taskId
+  - PUT /api/projects/:projectId/tasks/:taskId
+  - DELETE /api/projects/:projectId/tasks/:taskId
+  - [POST /api/projects/:projectId/tasks/:taskId/status]
 
 ## Installation
 
