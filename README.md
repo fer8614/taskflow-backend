@@ -108,7 +108,7 @@ This document provides an overview of the testing suite for the project API endp
 - [Running Tests](#running-tests)
 - [Test Cases](#test-cases)
   - [GET /api](#get-api)
-  - [POST /api/projects](#post-apiprojects)
+  - POST /api/projects
   - [GET /api/projects/](#get-apiprojects)
   - [GET /api/projects/:id](#get-apiprojectsid)
   - [PUT /api/projects/:id](#put-apiprojectsid)
