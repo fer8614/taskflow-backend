@@ -7,6 +7,62 @@ import { projectExist } from "../middleware/project";
 import { taskBelongsToProject, taskExist } from "../middleware/task";
 
 const router = Router();
+/**
+ *@swagger
+ *components:
+ *   schemas:
+ *      Project:
+ *          type: object
+ *          properties:
+ *              id:
+ *                  type: string
+ *                  description: The auto-generated id of the project
+ *                  example: 5f7f5b3b5f3d1b0017f3b1b1
+ *              projectName:
+ *                  type: string
+ *                  description: The name of the project
+ *                  example: Project 1
+ *              clientName:
+ *                  type: string
+ *                  description: The name of the client
+ *                  example: Client 1
+ *              description:
+ *                  type: string
+ *                  description: The description of the project
+ *                  example: This is a project
+ *              tasks:
+ *                  properties:
+ *                      id:
+ *                          type: string
+ *                          description: The auto-generated id of the task
+ *                          example: 5f7f5b3b5f3d1b0017f3b1b1
+ *                      name:
+ *                          type: string
+ *                          description: The name of the task
+ *                          example: Task 1
+ *                      description:
+ *                          type: string
+ *                          description: The description of the task
+ *                          example: This is a task
+ *                      project:
+ *                          type: string
+ *                          description: The id of the project the task belongs to
+ *                          example: 5f7f5b3b5f3d1b0017f3b1b1
+ *                      status:
+ *                          type: string
+ *                          description: The status of the task
+ *                          example: pending
+ */
+
+/**
+ * @swagger
+ * /api/projects:
+ *      get:
+ *          summary: Get all projects
+ *          tags:
+ *              - Projects
+ *          description: Get all projects
+ * */
 
 router.post(
   "/",
