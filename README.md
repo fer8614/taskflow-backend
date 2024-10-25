@@ -9,7 +9,7 @@ Backend for the TaskFlow web application, a Full Stack MERN project (MongoDB, Ex
 - [Technologies](#technologies)
 - [Installation](#installation)
 - [Usage](#usage)
-- [API Docs SWAGGER](#API-Documentation)
+- [API Docs SWAGGER](#API-Documentation-Swagger)
 - [API Endpoints](#api-endpoints)
 - [Testing](#testing)
 - [Contributing](#contributing)
@@ -66,7 +66,55 @@ TaskFlow is a task management web application designed to help users organize an
 
 Once the server is running, you can access the API at `http://localhost:your_preferred_port`. You can use tools like Postman or Insomnia to test the API endpoints.
 
-## API Documentation
+## API Documentation Swagger
+
+Our project includes comprehensive API documentation generated with Swagger. You can access the interactive API documentation through the following endpoint:
+
+### Accessing Swagger API Documentation
+
+To view the API documentation, navigate to the following URL in your web browser:
+
+```
+http://<your-domain>/api-docs
+```
+
+Replace `<your-domain>` with the actual domain or IP address where your API is hosted.
+
+### Features
+
+The Swagger API documentation provides the following features:
+
+- **Interactive API Explorer**: Easily test API endpoints directly from the documentation.
+- **Detailed Endpoint Information**: View detailed information about each API endpoint, including request parameters, response formats, and status codes.
+- **Schema Definitions**: Understand the structure of request and response payloads with detailed schema definitions.
+- **Authentication**: Learn how to authenticate and authorize API requests.
+
+### Example
+
+Here is an example of how to access the API documentation:
+
+```
+http://localhost:3000/api-docs
+```
+
+### Usage
+
+1. Open your web browser.
+2. Enter the URL `http://<your-domain>/api-docs`.
+3. Explore the API endpoints and test them directly from the Swagger UI.
+
+### Notes
+
+- Ensure that your API server is running and accessible.
+- The Swagger documentation is automatically generated based on the API specifications defined in your project.
+
+For more information on how to use Swagger, visit the [Swagger official documentation](https://swagger.io/docs/).
+
+---
+
+Feel free to reach out if you have any questions or need further assistance with the API documentation.
+
+This markdown provides a clear and concise description of how to access and use the Swagger API documentation for your project. Adjust the `<your-domain>` placeholder to match your specific setup.
 
 ## API Endpoints
 > [!NOTE]
