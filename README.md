@@ -9,6 +9,7 @@ Backend for the TaskFlow web application, a Full Stack MERN project (MongoDB, Ex
 - [Technologies](#technologies)
 - [Installation](#installation)
 - [Usage](#usage)
+- [API Docs SWAGGER](#API-Documentation)
 - [API Endpoints](#api-endpoints)
 - [Testing](#testing)
 - [Contributing](#contributing)
@@ -64,6 +65,8 @@ TaskFlow is a task management web application designed to help users organize an
 ## Usage
 
 Once the server is running, you can access the API at `http://localhost:your_preferred_port`. You can use tools like Postman or Insomnia to test the API endpoints.
+
+## API Documentation
 
 ## API Endpoints
 > [!NOTE]
