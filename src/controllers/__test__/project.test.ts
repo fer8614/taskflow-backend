@@ -100,6 +100,9 @@ describe("GET /api/projects/:id", () => {
     const response = await request(server).get(`/api/projects/${projectId}`);
     expect(response.status).toBe(200);
     expect(response.headers["content-type"]).toMatch(/json/);
+
+    console.log(response.request.toJSON());
+    console.log(response.body);
   });
 });
 
@@ -175,6 +178,10 @@ describe("PUT /api/projects/;id", () => {
         projectName: "Test Client v2",
         description: "Test Description v2",
       });
+
+    console.log(response.request.toJSON());
+    console.log(response.body);
+
     expect(response.status).toBe(200);
     expect(response.request.toJSON()).toHaveProperty("data");
 

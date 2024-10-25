@@ -1,4 +1,5 @@
 import swaggerJSDoc from "swagger-jsdoc";
+import { SwaggerUiOptions } from "swagger-ui-express";
 
 const options: swaggerJSDoc.Options = {
   swaggerDefinition: {
@@ -19,4 +20,16 @@ const options: swaggerJSDoc.Options = {
 };
 
 const swaggerSpec = swaggerJSDoc(options);
+
+const swaggerUiOptions: SwaggerUiOptions = {
+  customCss: `
+    .topbar-wrapper .link {
+      content: url('https://devpositive.com/logo.png');
+      height: 70px;
+      width: auto;
+    }
+  `,
+  customSiteTitle: "Docs Rest API TaskFlow",
+};
 export default swaggerSpec;
+export { swaggerUiOptions };
