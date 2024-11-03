@@ -155,14 +155,15 @@ This document provides an overview of the testing suite for the project API endp
 
 ## API Endpoints
 > [!NOTE]
-> To perform the test in the server.ts file, cors must be disabled: // app.use(cors(corsConfig));
+> To perform the test in the server.ts file, you must disable the line where the call to cors is made:
+> // app.use(cors(corsConfig));
 
 ## Table of Contents
 
 - [Installation](#installation)
 - [Running Tests](#running-tests)
 - [Test Cases](#test-cases)
-  - [GET /api](#get-api)
+  - GET /api
   - POST /api/projects
   - GET /api/projects/
   - GET /api/projects/:id
