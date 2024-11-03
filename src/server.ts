@@ -1,5 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
+import { corsConfig } from "./config/cors";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec, { swaggerUiOptions } from "./config/swagger";
 import { connectDB } from "./config/db";
@@ -10,6 +12,7 @@ dotenv.config();
 connectDB();
 
 const app = express();
+app.use(cors(corsConfig));
 
 app.use(express.json());
 
