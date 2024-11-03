@@ -153,6 +153,10 @@ For a complete list of endpoints and their details, refer to the API documentati
 
 This document provides an overview of the testing suite for the project API endpoints. The tests are written using [Jest](https://jestjs.io/) and [Supertest](https://github.com/visionmedia/supertest) to ensure the API endpoints are functioning correctly.
 
+## API Endpoints
+> [!NOTE]
+> To perform the test in the server.ts file, cors must be disabled: // app.use(cors(corsConfig));
+
 ## Table of Contents
 
 - [Installation](#installation)
