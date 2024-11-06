@@ -6,6 +6,7 @@ import swaggerUi from "swagger-ui-express";
 import swaggerSpec, { swaggerUiOptions } from "./config/swagger";
 import { connectDB } from "./config/db";
 import projectRoutes from "./routes/projectRoutes";
+import morgan from "morgan";
 
 dotenv.config();
 
@@ -14,6 +15,10 @@ connectDB();
 const app = express();
 app.use(cors(corsConfig));
 
+//Logging
+app.use(morgan("dev"));
+
+//Read data from form
 app.use(express.json());
 
 //Routes
