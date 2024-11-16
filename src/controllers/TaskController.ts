@@ -19,7 +19,12 @@ export default class TaskController {
   };
 
   static getTaskById = async (req: Request, res: Response) => {
-    res.json(req.task);
+    const { taskId } = req.params;
+    const task = await Task.findById(taskId);
+    if (!task) {
+      res.status(404).json({ error: "Task not found" });
+    }
+    res.json(task);
   };
 
   static updateTask = async (req: Request, res: Response) => {
