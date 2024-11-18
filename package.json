@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec ts-node src/index.ts",
+    "dev:api": "nodemon --exec ts-node src/index.ts --api",
     "test": "jest --detectOpenHandles",
     "test:coverage": "npm run pretest && jest --detectOpenHandles --coverage",
     "pretest": "ts-node ./src/data --clear"
