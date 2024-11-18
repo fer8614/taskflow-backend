@@ -59,7 +59,7 @@ TaskFlow is a task management web application designed to help users organize an
 4. Start the development server:
 
     ```bash
-    npm run dev
+    npm run dev:api
     ```
 
 ## Usage
