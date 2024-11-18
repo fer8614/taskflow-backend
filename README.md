@@ -59,7 +59,7 @@ TaskFlow is a task management web application designed to help users organize an
 4. Start the development server:
 
     ```bash
-    npm run dev:api
+    npm run dev
     ```
 
 ## Usage
@@ -154,6 +154,9 @@ For a complete list of endpoints and their details, refer to the API documentati
 This document provides an overview of the testing suite for the project API endpoints. The tests are written using [Jest](https://jestjs.io/) and [Supertest](https://github.com/visionmedia/supertest) to ensure the API endpoints are functioning correctly.
 
 ## API Endpoints
+> [!NOTE]
+> To perform the test in the server.ts file, you must disable the line where the call to cors is made:
+> // app.use(cors(corsConfig));
 
 ## Table of Contents
 
