@@ -1,0 +1,24 @@
+import { transporter } from "../config/nodemailer";
+
+interface IEmail {
+  email: string;
+  name: string;
+  token: string;
+}
+
+export class AuthEmail {
+  static sendConfirmationEmail = async (user: IEmail) => {
+    const info = await transporter.sendMail({
+      from: "TaskFlow <admin@taskflow.com>",
+      to: user.email,
+      subject: "TaskFlow - Confirm your email",
+      text: "TaskFlow - Confirm your account",
+      html: `<p>Hello ${user.name} please click the link to confirm your email</p>
+      <a href="">Confirm your account</a>
+      <p> Enter code: <b>${user.token}</b></p>
+      <p>This token expire in 5 minutes</p>`,
+    });
+
+    console.log("Message sent: %s", info.messageId);
+  };
+}
