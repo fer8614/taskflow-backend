@@ -4,6 +4,7 @@ import User from "../models/User";
 import { hashPassword } from "../utils/auth";
 import Token from "../models/Token";
 import { generateToken } from "../utils/token";
+import { transporter } from "../config/nodemailer";
 
 export class AuthController {
   static createAccount = async (req: Request, res: Response) => {
@@ -27,6 +28,15 @@ export class AuthController {
       const token = new Token();
       token.token = generateToken();
       token.user = user.id;
+
+      //Send email
+      await transporter.sendMail({
+        from: "TaskFlow <admin@taskflow.com>",
+        to: user.email,
+        subject: "TaskFlow - Confirm your email",
+        text: "TaskFlow - Confirm your account",
+        html: `<p>please click the link to confirm your email: <a href="http://localhost:3000/confirm-email?token=${token.token}">Confirm email</a></p>`,
+      });
 
       await Promise.allSettled([user.save(), token.save()]);
 
