@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import User from "../models/User";
 import { hashPassword } from "../utils/auth";
+import Token from "../models/Token";
+import { generateToken } from "../utils/token";
 
 export class AuthController {
   static createAccount = async (req: Request, res: Response) => {
@@ -20,7 +22,13 @@ export class AuthController {
       // Hash password
       const salt = await bcrypt.genSalt(10);
       user.password = await hashPassword(password);
-      await user.save();
+
+      //Generate token
+      const token = new Token();
+      token.token = generateToken();
+      token.user = user.id;
+
+      await Promise.allSettled([user.save(), token.save()]);
 
       res.send("Account created, check your email to confirm");
     } catch (error) {
