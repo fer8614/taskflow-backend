@@ -4,7 +4,6 @@ import User from "../models/User";
 import { hashPassword } from "../utils/auth";
 import Token from "../models/Token";
 import { generateToken } from "../utils/token";
-import { transporter } from "../config/nodemailer";
 import { AuthEmail } from "../emails/AuthEmail";
 
 export class AuthController {
@@ -40,6 +39,26 @@ export class AuthController {
       await Promise.allSettled([user.save(), token.save()]);
 
       res.send("Account created, check your email to confirm");
+    } catch (error) {
+      res.status(500).json({ message: "Internal server error" });
+    }
+  };
+
+  static confirmAccount = async (req: Request, res: Response) => {
+    try {
+      const { token } = req.body;
+      const tokenExists = await Token.findOne({ token });
+      if (!tokenExists) {
+        const error = new Error("Invalid token");
+        res.status(401).json({ error: error.message });
+        return;
+      }
+
+      const user = await User.findById(tokenExists.user);
+      user!.confirmed = true;
+
+      await Promise.allSettled([user!.save(), tokenExists.deleteOne()]);
+      res.send("Account confirmed correctly");
     } catch (error) {
       res.status(500).json({ message: "Internal server error" });
     }
