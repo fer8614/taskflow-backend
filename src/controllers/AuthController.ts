@@ -50,7 +50,7 @@ export class AuthController {
       const tokenExists = await Token.findOne({ token });
       if (!tokenExists) {
         const error = new Error("Invalid token");
-        res.status(401).json({ error: error.message });
+        res.status(404).json({ error: error.message });
         return;
       }
 
@@ -70,9 +70,29 @@ export class AuthController {
       const user = await User.findOne({ email });
       if (!user) {
         const error = new Error("User not found");
+        res.status(404).json({ error: error.message });
+        return;
+      }
+      if (!user.confirmed) {
+        const token = new Token();
+        token.user = user.id;
+        token.token = generateToken();
+        await token.save();
+
+        //Send email
+        AuthEmail.sendConfirmationEmail({
+          email: user.email,
+          name: user.name,
+          token: token.token,
+        });
+
+        const error = new Error(
+          "The account is not confirmed, a confirmation email has been sent.",
+        );
         res.status(401).json({ error: error.message });
         return;
       }
+      console.log(user);
     } catch (error) {
       res.status(500).json({ message: "Internal server error" });
     }
