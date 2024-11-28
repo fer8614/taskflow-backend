@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import User from "../models/User";
-import { hashPassword } from "../utils/auth";
+import { checkPassword, hashPassword } from "../utils/auth";
 import Token from "../models/Token";
 import { generateToken } from "../utils/token";
 import { AuthEmail } from "../emails/AuthEmail";
@@ -92,7 +92,14 @@ export class AuthController {
         res.status(401).json({ error: error.message });
         return;
       }
-      console.log(user);
+      //Check password
+      const isPasswordValid = await checkPassword(password, user.password);
+      if (!isPasswordValid) {
+        const error = new Error("Invalid password");
+        res.status(401).json({ error: error.message });
+        return;
+      }
+      res.send("Login success");
     } catch (error) {
       res.status(500).json({ message: "Internal server error" });
     }
