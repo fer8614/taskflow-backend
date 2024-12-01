@@ -14,7 +14,7 @@ export class AuthEmail {
       subject: "TaskFlow - Confirm your email",
       text: "TaskFlow - Confirm your account",
       html: `<p>Hello ${user.name} please click the link to confirm your email</p>
-      <a href="">Confirm your account</a>
+      <a href="${process.env.FRONTEND_URL}/auth/confirm-account">Confirm your account</a>
       <p> Enter code: <b>${user.token}</b></p>
       <p>This token expire in 5 minutes</p>`,
     });
