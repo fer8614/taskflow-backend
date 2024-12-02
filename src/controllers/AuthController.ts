@@ -104,4 +104,42 @@ export class AuthController {
       res.status(500).json({ message: "Internal server error" });
     }
   };
+
+  static requestConfirmationCode = async (req: Request, res: Response) => {
+    try {
+      const { email } = req.body;
+
+      //User exists
+      const user = await User.findOne({ email });
+      if (!user) {
+        const error = new Error("The user is not registered");
+        res.status(404).json({ error: error.message });
+        return;
+      }
+
+      if (user.confirmed) {
+        const error = new Error("The account is already confirmed");
+        res.status(409).json({ error: error.message });
+        return;
+      }
+
+      //Generate token
+      const token = new Token();
+      token.token = generateToken();
+      token.user = user.id;
+
+      //Send email
+      AuthEmail.sendConfirmationEmail({
+        email: user.email,
+        name: user.name,
+        token: token.token,
+      });
+
+      await Promise.allSettled([user.save(), token.save()]);
+
+      res.send("A new token has been sent to your email");
+    } catch (error) {
+      res.status(500).json({ message: "Internal server error" });
+    }
+  };
 }
