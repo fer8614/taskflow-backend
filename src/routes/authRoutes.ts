@@ -44,4 +44,11 @@ router.post(
   AuthController.requestConfirmationCode,
 );
 
+router.post(
+  "/forgot-password",
+  body("email").isEmail().withMessage("Email is invalid"),
+  handleInputErrors,
+  AuthController.forgotPassword,
+);
+
 export default router;

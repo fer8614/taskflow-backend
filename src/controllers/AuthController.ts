@@ -142,4 +142,36 @@ export class AuthController {
       res.status(500).json({ message: "Internal server error" });
     }
   };
+
+  static forgotPassword = async (req: Request, res: Response) => {
+    try {
+      const { email } = req.body;
+
+      //User exists
+      const user = await User.findOne({ email });
+      if (!user) {
+        const error = new Error("The user is not registered");
+        res.status(404).json({ error: error.message });
+        return;
+      }
+
+      //Generate token
+      const token = new Token();
+      token.token = generateToken();
+      token.user = user.id;
+
+      await token.save();
+
+      //Send email
+      AuthEmail.sendPasswordResetToken({
+        email: user.email,
+        name: user.name,
+        token: token.token,
+      });
+
+      res.send("Check your email to reset your password");
+    } catch (error) {
+      res.status(500).json({ message: "Internal server error" });
+    }
+  };
 }
