@@ -189,4 +189,26 @@ export class AuthController {
       res.status(500).json({ message: "Internal server error" });
     }
   };
+
+  static updatePasswordWithToken = async (req: Request, res: Response) => {
+    try {
+      const { token } = req.params;
+      const { password } = req.body;
+
+      const tokenExists = await Token.findOne({ token });
+      if (!tokenExists) {
+        const error = new Error("Invalid token");
+        res.status(404).json({ error: error.message });
+        return;
+      }
+
+      const user = await User.findById(tokenExists.user);
+      user!.password = await hashPassword(password);
+
+      await Promise.allSettled([user!.save(), tokenExists.deleteOne()]);
+      res.send("Password updated correctly");
+    } catch (error) {
+      res.status(500).json({ message: "Internal server error" });
+    }
+  };
 }
