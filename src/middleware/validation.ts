@@ -5,13 +5,14 @@ export const handleInputErrors = async (
   req: Request,
   res: Response,
   next: NextFunction,
-): Promise<void> => {
+) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     res.status(400).json({ errors: errors.array() });
-  } else {
-    next();
+    return;
   }
+  next();
+  return;
 };
 
 export const asyncHandler =
