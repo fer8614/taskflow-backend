@@ -165,7 +165,7 @@ router.post(
  *                                  $ref: '#/components/schemas/Projects'
  *
  */
-router.get("/", ProjectController.getAllProjects);
+router.get("/", authenticate, ProjectController.getAllProjects);
 
 /**
  * @swagger
