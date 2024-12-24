@@ -3,8 +3,13 @@ import Project from "../models/Project";
 
 export class ProjectController {
   static createProject = async (req: Request, res: Response) => {
+    if (!req.user) {
+      res.status(400).json({ error: "User not authenticated" });
+      return;
+    }
     const project = new Project(req.body);
-    console.log(req.user);
+    // assign a manager
+    project.manager = req.user.id;
 
     await project.save();
     res.status(201).json(project);
