@@ -24,8 +24,18 @@ export class ProjectController {
 
   static getProjectById = async (req: Request, res: Response) => {
     const { id } = req.params;
-
     const project = await Project.findById(id).populate("tasks");
+    if (!project) {
+      res.status(404).json({ error: "Project not found" });
+      return;
+    }
+    if (
+      !project.manager ||
+      project.manager.toString() !== req.user?._id?.toString()
+    ) {
+      res.status(403).json({ error: "Unauthorized access" });
+      return;
+    }
     res.json(project);
   };
 
