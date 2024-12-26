@@ -26,14 +26,16 @@ export class ProjectController {
     const { id } = req.params;
     const project = await Project.findById(id).populate("tasks");
     if (!project) {
-      res.status(404).json({ error: "Project not found" });
+      const error = new Error("Project not found");
+      res.status(404).json({ error: error.message });
       return;
     }
     if (
       !project.manager ||
       project.manager.toString() !== req.user?._id?.toString()
     ) {
-      res.status(403).json({ error: "Unauthorized access" });
+      const error = new Error("Unauthorized access");
+      res.status(403).json({ error: error.message });
       return;
     }
     res.json(project);
@@ -47,6 +49,15 @@ export class ProjectController {
       res.status(404).json({ error: error.message });
       return;
     }
+
+    if (
+      !project.manager ||
+      project.manager.toString() !== req.user?._id?.toString()
+    ) {
+      const error = new Error("Only the manager can update the project");
+      res.status(403).json({ error: error.message });
+      return;
+    }
     project.clientName = req.body.clientName;
     project.projectName = req.body.projectName;
     project.description = req.body.description;
@@ -58,6 +69,19 @@ export class ProjectController {
   static deleteProject = async (req: Request, res: Response) => {
     const { id } = req.params;
     const project = await Project.findById(id);
+    if (!project) {
+      const error = new Error("Project not found");
+      res.status(404).json({ error: error.message });
+      return;
+    }
+    if (
+      !project.manager ||
+      project.manager.toString() !== req.user?._id?.toString()
+    ) {
+      const error = new Error("Only the manager can delete the project");
+      res.status(403).json({ error: error.message });
+      return;
+    }
     await project?.deleteOne();
     res.send("Project Deleted Successfully");
   };
