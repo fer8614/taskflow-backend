@@ -6,6 +6,7 @@ import TaskController from "../controllers/TaskController";
 import { projectExist } from "../middleware/project";
 import { taskBelongsToProject, taskExist } from "../middleware/task";
 import { authenticate } from "../middleware/auth";
+import { TeamMemberController } from "../controllers/TeamController";
 
 const router = Router();
 
@@ -552,6 +553,14 @@ router.post(
   body("status").notEmpty().withMessage("Status is required"),
   handleInputErrors,
   TaskController.updateStatus,
+);
+
+/** Routes for teams members */
+router.post(
+  "/:projectId/team/find",
+  body("email").isEmail().toLowerCase().withMessage("Invalid email"),
+  handleInputErrors,
+  TeamMemberController.findMembersByEmail,
 );
 
 export default router;
