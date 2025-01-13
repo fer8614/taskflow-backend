@@ -17,7 +17,10 @@ export class ProjectController {
 
   static getAllProjects = async (req: Request, res: Response) => {
     const projects = await Project.find({
-      $or: [{ manager: { $in: req.user?._id } }],
+      $or: [
+        { manager: { $in: req.user?._id } },
+        { team: { $in: req.user?._id } },
+      ],
     });
     res.json(projects);
   };
@@ -32,7 +35,8 @@ export class ProjectController {
     }
     if (
       !project.manager ||
-      project.manager.toString() !== req.user?._id?.toString()
+      (project.manager.toString() !== req.user?._id?.toString() &&
+        !project.team.includes(req.user?._id as any))
     ) {
       const error = new Error("Unauthorized access");
       res.status(403).json({ error: error.message });
