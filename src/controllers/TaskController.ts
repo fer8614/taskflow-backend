@@ -19,10 +19,12 @@ export default class TaskController {
   };
 
   static getTaskById = async (req: Request, res: Response) => {
-    const { taskId } = req.params;
-    const task = await Task.findById(taskId);
+    const task = await Task.findById(req.task.id).populate({
+      path: "completedBy",
+      select: "id name email",
+    });
     if (!task) {
-      res.status(404).json({ error: "Task not found" });
+      res.status(500).json({ error: "There was an error" });
     }
     res.json(task);
   };
