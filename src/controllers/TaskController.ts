@@ -46,6 +46,11 @@ export default class TaskController {
   static updateStatus = async (req: Request, res: Response) => {
     const { status } = req.body;
     req.task.status = status;
+    if (status === "pending") {
+      req.task.completedBy = null;
+    } else {
+      req.task.completedBy = req.user?.id;
+    }
     await req.task.save();
     res.send("Task status updated correctly");
   };
