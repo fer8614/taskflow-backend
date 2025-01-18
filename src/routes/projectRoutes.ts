@@ -589,10 +589,12 @@ router.delete(
 
 /** Routes for Notes */
 router.post(
-  "/:projectId/task/:taskId/notes",
+  "/:projectId/tasks/:taskId/notes",
   body("content").notEmpty().withMessage("The content of the note is required"),
   handleInputErrors,
   NoteController.createNote,
 );
+
+router.get("/:projectId/tasks/:taskId/notes", NoteController.getTaskNotes);
 
 export default router;
