@@ -209,6 +209,9 @@ router.get(
   ProjectController.getProjectById,
 );
 
+/** Routes for tasks */
+router.param("projectId", projectExist);
+
 /**
  * @swagger
  * /api/projects/{id}:
@@ -256,12 +259,13 @@ router.get(
  *                   description: Project not found
  */
 router.put(
-  "/:id",
-  param("id").isMongoId().withMessage("Invalid project id"),
+  "/:projectId",
+  param("projectId").isMongoId().withMessage("Invalid project id"),
   body("projectName").notEmpty().withMessage("Project name is required"),
   body("clientName").notEmpty().withMessage("Client name is required"),
   body("description").notEmpty().withMessage("Description is required"),
   handleInputErrors,
+  hasAuthorization,
   ProjectController.updateProject,
 );
 
@@ -295,14 +299,12 @@ router.put(
  *                  description: Invalid project id
  */
 router.delete(
-  "/:id",
-  param("id").isMongoId().withMessage("Invalid project id"),
+  "/:projectId",
+  param("projectId").isMongoId().withMessage("Invalid project id"),
   handleInputErrors,
+  hasAuthorization,
   ProjectController.deleteProject,
 );
-
-/** Routes for tasks */
-router.param("projectId", projectExist);
 
 /**
  * @swagger

@@ -1,5 +1,6 @@
 import mongoose, { Schema, Types } from "mongoose";
 import type { Document } from "mongoose";
+import Note from "./Note";
 
 const taskStatus = {
   PENDING: "pending",
@@ -51,6 +52,13 @@ export const TackSchema: Schema = new Schema(
   },
   { timestamps: true },
 );
+
+//Middelware
+TackSchema.pre("deleteOne", { document: true }, async function () {
+  const taskId = this._id;
+  if (!taskId) return;
+  await Note.deleteMany({ task: taskId });
+});
 
 const Task = mongoose.model<ITask>("Task", TackSchema);
 
