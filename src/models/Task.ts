@@ -53,7 +53,7 @@ export const TackSchema: Schema = new Schema(
   { timestamps: true },
 );
 
-//Middelware
+//Middleware
 TackSchema.pre("deleteOne", { document: true }, async function () {
   const taskId = this._id;
   if (!taskId) return;
