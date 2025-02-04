@@ -54,7 +54,14 @@ TaskFlow is a task management web application designed to help users organize an
     ```plaintext
     DATABASE_URL=your_mongodb_connection_string
     PORT=your_preferred_port
+    SMTP_HOST=your-HOST-for-EMAIL-SERVICE
+    SMTP_PORT=your-PORT-for-EMAIL-SERVICE
+    SMTP_USER=your-USER-for-EMAIL-SERVICE
+    SMTP_PASS=your-password-for-EMAIL-SERVICE
+    JWT_SECRET=your-password-for-JWT
     ```
+    > [!NOTE]
+> To have a real email sending service you must configure one, which can be RESEND, in this case MAILTRAP is configured in order to test the services and verify the operation of the application.
 
 4. Start the development server:
 
