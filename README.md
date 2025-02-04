@@ -60,7 +60,7 @@ TaskFlow is a task management web application designed to help users organize an
     SMTP_PASS=your-password-for-EMAIL-SERVICE
     JWT_SECRET=your-password-for-JWT
     ```
-    > [!NOTE]
+> [!NOTE]
 > To have a real email sending service you must configure one, which can be RESEND, in this case MAILTRAP is configured in order to test the services and verify the operation of the application.
 
 4. Start the development server:
